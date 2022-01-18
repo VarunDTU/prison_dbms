@@ -38,23 +38,45 @@ public:
 
         file.open("prison.text",ios::in);
           while (!file.eof()){
-       file>>ch>>serial>>ch>>age>>ch>>time>>ch>>name>>ch>>crime;
+       file>>serial>>age>>time>>name>>crime;
        cout<<" serial: "<<serial<<endl<<" age: "<<age<<endl<<" time: "<<time<<endl<<" Name: "<<name<<endl<<" crime: "<<crime<<endl;
        cout<<endl<<endl;
           }
        file.close();
+       getch();
 
     }
     void remove(){
-         char ch;
-        fstream file;
-        file.open("prison.text",ios::in);
-       file>>ch>>serial>>ch>>age>>ch>>time>>ch>>name>>ch>>crime;
+
 
     }
 
     void find(){
 
+        int id_input,x=0;
+        char ch;
+        fstream file;
+        cout<<"enter id number: ";
+        cin>>id_input;
+
+        file.open("prison.text",ios::in);
+        while (!file.eof()){
+
+                    file>>serial>>age>>time>>name>>crime;
+                    if(serial==id_input){
+                        cout<<" serial: "<<serial<<endl<<" age: "<<age<<endl<<" time: "<<time<<endl<<" Name: "<<name<<endl<<" crime: "<<crime<<endl;
+       cout<<endl<<endl;
+       x++;
+                    }
+
+
+        }
+        if(x==0){
+                cout<<"nothing found :( "<<endl;
+                cout<<serial;
+        }
+        file.close();
+        getch();
 
     }
 };
@@ -95,23 +117,28 @@ int main(){
     cout<<"5.exit"<<endl;
     cin>>x;
     switch(x) {
+
   case 1:
     s.add();
     goto menu;
     break;
+
   case 2:
     s.find();
     goto menu;
     break;
+
   case 3:
     s.remove();
     goto menu;
     break;
+
   case 4:
     s.show();
     getch();
     goto menu;
     break;
+
   case 5:
     exit(0);
 
@@ -120,7 +147,7 @@ int main(){
       exit(0);
       goto menu;
 
-    // code block
+
 }
 
     return 0;
