@@ -186,7 +186,7 @@ int main(){
 
   case 5:{
     string newpass;
-    cout<<"enter newpassword";
+    cout<<"enter new password";
     cin>>newpass;
     password_change(newpass);
 
