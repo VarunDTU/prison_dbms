@@ -1,10 +1,13 @@
 #include<iostream>
-#include <conio.h>
-#include<fstream>
-#include<stdlib.h>
+#include <conio.h>          //for getch() function
+#include<fstream>           //for file handling
+#include<stdlib.h>          //for system("CLS")
 using namespace std;
 
 string password="0000";
+
+//gets password for session
+
 void pass(){
 
         fstream pass_file;
@@ -17,6 +20,8 @@ void pass(){
         pass_file.close();
 }
 
+//encrypts a string with return
+
 string encrpt(string x){
 
     int key=26;
@@ -27,6 +32,9 @@ string encrpt(string x){
     return x;
 
 }
+
+// changes password and stores new value(encrypted) in file
+
 
 void password_change(string s){
         s=encrpt(s);
@@ -42,6 +50,8 @@ void password_change(string s){
 
 
 }
+
+// class for prison had add(),show(),find() function
 
 class prison{
 private:
@@ -84,10 +94,7 @@ public:
        getch();
 
     }
-    void remove(){
 
-
-    }
 
     void find(){
 
@@ -120,6 +127,8 @@ public:
     }
 };
 
+// check the entered password against stored password
+
 bool auth(){
      pass();
     cout<<"enter password"<<endl;
@@ -133,6 +142,8 @@ bool auth(){
     return false;
 
 }
+
+//main function
 
 int main(){
 
@@ -155,10 +166,9 @@ int main(){
     cout<<"Enter choices:"<<endl;
     cout<<"1.Add prison information:"<<endl;
     cout<<"2.Find prisoner: "<<endl;
-    cout<<"3.Remove prisoner"<<endl;
-    cout<<"4.show all prisoners value"<<endl;
-    cout<<"5.change password"<<endl;
-    cout<<"6.exit"<<endl;
+    cout<<"3.show all prisoners value"<<endl;
+    cout<<"4.change password"<<endl;
+    cout<<"5.exit"<<endl;
 
     cin>>x;
     switch(x) {
@@ -174,17 +184,12 @@ int main(){
     break;
 
   case 3:
-    s.remove();
-    goto menu;
-    break;
-
-  case 4:
     s.show();
     getch();
     goto menu;
     break;
 
-  case 5:{
+  case 4:{
     string newpass;
     cout<<"enter new password";
     cin>>newpass;
@@ -196,7 +201,7 @@ int main(){
 
 
 
-  case 6:
+  case 5:
       cout<<"enter valid input ";
       exit(0);
       goto menu;
