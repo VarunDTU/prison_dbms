@@ -4,7 +4,44 @@
 #include<stdlib.h>
 using namespace std;
 
-string password="1234";
+string password="0000";
+void pass(){
+
+        fstream pass_file;
+
+        pass_file.open("password.text",ios::in);
+        while (!pass_file.eof()){
+        pass_file>>password;
+        }
+
+        pass_file.close();
+}
+
+string encrpt(string x){
+
+    int key=26;
+    for(int i=0;i<x.size();i++){
+        x[i]+=26;
+    }
+    x="RWEWRwqe21WEEda"+x+"213wqweq";
+    return x;
+
+}
+
+void password_change(string s){
+        s=encrpt(s);
+
+        fstream file;
+
+       file.open("password.text",ios::app|ios::out);
+
+       file<<s<<" ";
+
+       file.close();
+
+
+
+}
 
 class prison{
 private:
@@ -34,6 +71,7 @@ public:
     }
     void show(){
         char ch;
+
         fstream file;
 
         file.open("prison.text",ios::in);
@@ -52,6 +90,7 @@ public:
     }
 
     void find(){
+
 
         int id_input,x=0;
         char ch;
@@ -82,9 +121,11 @@ public:
 };
 
 bool auth(){
+     pass();
     cout<<"enter password"<<endl;
     string s;
     cin>>s;
+    s=encrpt(s);
     if(s==password){
         return true;
     }
@@ -94,12 +135,14 @@ bool auth(){
 }
 
 int main(){
+
     int x;
+    start:
     cout<<"hello to prison management system"<<endl<<"press enter to continue"<<endl;
     getch();
 
     if(!auth()){
-            cout<<"lul";
+            cout<<"Wrong password exiting.......";
             getch();
             exit(0);
     }
@@ -114,7 +157,9 @@ int main(){
     cout<<"2.Find prisoner: "<<endl;
     cout<<"3.Remove prisoner"<<endl;
     cout<<"4.show all prisoners value"<<endl;
-    cout<<"5.exit"<<endl;
+    cout<<"5.change password"<<endl;
+    cout<<"6.exit"<<endl;
+
     cin>>x;
     switch(x) {
 
@@ -139,13 +184,25 @@ int main(){
     goto menu;
     break;
 
-  case 5:
-    exit(0);
+  case 5:{
+    string newpass;
+    cout<<"enter newpassword";
+    cin>>newpass;
+    password_change(newpass);
 
-  default:
+    goto start;
+    break;
+  }
+
+
+
+  case 6:
       cout<<"enter valid input ";
       exit(0);
       goto menu;
+  default:
+    cout<<"wrong input :(";
+    goto menu;
 
 
 }
